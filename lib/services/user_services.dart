@@ -5,14 +5,14 @@ class UserServices {
   static CollectionReference _userCollection =
       Firestore.instance.collection('users');
   // Set Data User Baru Pada Firestore
-  static Future<void> updateUser(User user) {
+  static Future<void> updateUser(User user) async {
     _userCollection.document(user.id).setData({
       'email': user.email,
       'name': user.name,
       'balance': user.balance,
       'selectedGenres': user.selectedGenres,
       'selectedLanguages': user.selectedLanguage,
-      'profilePicture': user.profilePicture ?? '',
+      'profilePicture': user.profilePicture ?? ""
     });
   }
 
@@ -21,7 +21,7 @@ class UserServices {
 
     return User(id, snapshot.data['email'],
         balance: snapshot.data['balance'],
-        profilePicture: snapshot.data['ProfilePicture'],
+        profilePicture: snapshot.data['profilePicture'],
         selectedGenres: (snapshot.data['selectedGenres'] as List)
             .map((e) => e.toString())
             .toList(),

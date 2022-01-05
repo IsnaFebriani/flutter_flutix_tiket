@@ -1,6 +1,11 @@
 part of 'pages.dart';
 
 class MainPage extends StatefulWidget {
+  final int bottomNavBarIndex; //mau di index ticket atau di moviepage
+  final bool isExpired; //kalo di ticketpage, mau di yang expied ato yg bukan?
+
+  MainPage({this.bottomNavBarIndex = 0, this.isExpired = false});
+
   @override
   _MainPageState createState() => _MainPageState();
 }
@@ -31,9 +36,7 @@ class _MainPageState extends State<MainPage> {
         },
         children: <Widget>[
           MoviePage(),
-          Center(
-            child: Text("My Tickets"),
-          )
+          TicketPage(isExpiredTicket: widget.isExpired),
         ],
       ),
       createCustomBottomNavBar(),
@@ -47,8 +50,9 @@ class _MainPageState extends State<MainPage> {
             elevation: 0,
             backgroundColor: accentColor2,
             onPressed: () {
-              context.bloc<UserBloc>().add(SignOut());
-              AuthServices.signOut();
+              //context.bloc<UserBloc>().add(SignOut());AuthServices.signOut();
+              context.bloc<PageBloc>().add(GoToTopUpPage(
+                  GoToMainPage())); //gotomainpage itu pageevent nta
             },
             child: SizedBox(
               height: 26,

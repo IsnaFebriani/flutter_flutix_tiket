@@ -28,6 +28,26 @@ class PageBloc extends Bloc<PageEvent, PageState> {
       yield OnPreferencePage(event.registrationData);
     } else if (event is GoToAccountConfirmationPage) {
       yield OnAccountConfirmationPage(event.registrationData);
+    } else if (event is GoToMovieDetailPage) {
+      yield OnMovieDetailPage(event.movie);
+    } else if (event is GoToSelectSchedulePage) {
+      yield OnSelectSchedulePage(event.movieDetail);
+    } else if (event is GoToSelectSeatPage) {
+      yield OnSelectSeatPage(event.ticket);
+    } else if (event is GoToCheckoutPage) {
+      yield OnCheckoutPage(event.ticket);
+    } else if (event is GoToSuccessPage) {
+      yield OnSuccessPage(event.ticket, event.transaction);
+    } else if (event is GoToTicketDetailPage) {
+      yield OnTicketDetailPage(event.ticket);
+    } else if (event is GoToProfilePage) {
+      yield OnProfilePage();
+    } else if (event is GoToTopUpPage) {
+      yield OnTopUpPage(event.pageEvent);
+    } else if (event is GoToWalletPage) {
+      yield OnWalletPage(event.pageEvent);
+    } else if (event is GoToEditProfilePage) {
+      yield OnEditProfilePage(event.user);
     }
   }
 }
